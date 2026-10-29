@@ -117,4 +117,32 @@ $("search-form").addEventListener("submit", async (e) => {
   }
 });
 
+// Time-of-day greeting
+const USER_NAME = "Romina Alfeo";
+const hour = new Date().getHours();
+const timeOfDay = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+$("greeting").textContent = `${timeOfDay}, ${USER_NAME}`;
+
+// Theme switcher: light, dark, or system (follows the OS setting)
+function applyTheme(choice) {
+  if (choice === "system") delete document.documentElement.dataset.theme;
+  else document.documentElement.dataset.theme = choice;
+  document.querySelectorAll("[data-theme-option]").forEach((btn) => {
+    btn.setAttribute("aria-checked", btn.dataset.themeOption === choice);
+  });
+  try {
+    localStorage.setItem("theme", choice);
+  } catch (e) {}
+}
+
+document.querySelectorAll("[data-theme-option]").forEach((btn) => {
+  btn.addEventListener("click", () => applyTheme(btn.dataset.themeOption));
+});
+
+let savedTheme = "system";
+try {
+  savedTheme = localStorage.getItem("theme") || "system";
+} catch (e) {}
+applyTheme(savedTheme);
+
 loadWeather(DEFAULT_LOCATION);
