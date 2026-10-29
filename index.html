@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <main class="app">
+    <form id="search-form" class="glass search">
+      <input id="search-input" type="text" placeholder="Search city…" autocomplete="off" />
+      <button type="submit" aria-label="Search">⌕</button>
+    </form>
+
+    <section class="glass current">
+      <p id="location" class="location">Boca Raton</p>
+      <p id="temp" class="temp">--°</p>
+      <p id="condition" class="condition">Loading…</p>
+      <p id="hi-lo" class="hi-lo"></p>
+    </section>
+
+    <section class="glass">
+      <h2 class="label">Hourly Forecast</h2>
+      <div id="hourly" class="hourly"></div>
+    </section>
+
+    <section class="glass">
+      <h2 class="label">7-Day Forecast</h2>
+      <div id="daily" class="daily"></div>
+    </section>
+
+    <section class="details">
+      <div class="glass tile"><h2 class="label">Feels Like</h2><p id="feels" class="tile-value">--</p></div>
+      <div class="glass tile"><h2 class="label">Humidity</h2><p id="humidity" class="tile-value">--</p></div>
+      <div class="glass tile"><h2 class="label">Wind</h2><p id="wind" class="tile-value">--</p></div>
+      <div class="glass tile"><h2 class="label">UV Index</h2><p id="uv" class="tile-value">--</p></div>
+    </section>
+
+    <p class="credit">Data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
