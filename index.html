@@ -52,6 +52,20 @@
       <div id="daily" class="daily"></div>
     </section>
 
+    <section class="glass">
+      <h2 class="label">Solar Projection · 16 Days</h2>
+      <div class="solar-inputs">
+        <label>Plant size (MW)<input id="plant-mw" type="number" min="0.1" step="0.1" value="10" /></label>
+        <label>Panel tilt (°)<input id="tilt" type="number" min="0" max="90" step="1" value="26" /></label>
+      </div>
+      <div id="solar-summary" class="solar-summary"></div>
+      <div id="solar" class="solar"></div>
+      <p class="solar-note">
+        Estimate from forecast sunlight on south-facing panels, with 20% system losses and heat derating.
+        On-peak = 7 AM–11 PM weekdays. Not a bankable forecast; accuracy drops after 3–5 days.
+      </p>
+    </section>
+
     <section class="details">
       <div class="glass tile"><h2 class="label">Feels Like</h2><p id="feels" class="tile-value">--</p></div>
       <div class="glass tile"><h2 class="label">Humidity</h2><p id="humidity" class="tile-value">--</p></div>
