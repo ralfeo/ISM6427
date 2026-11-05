@@ -40,6 +40,7 @@
       <p id="temp" class="temp">--°</p>
       <p id="condition" class="condition">Loading…</p>
       <p id="hi-lo" class="hi-lo"></p>
+      <p id="noaa-now" class="noaa-now"></p>
     </section>
 
     <section class="glass">
@@ -60,10 +61,13 @@
       </div>
       <div id="solar-summary" class="solar-summary"></div>
       <div id="solar" class="solar"></div>
-      <p class="solar-note">
-        Estimate from forecast sunlight on south-facing panels, with 20% system losses and heat derating.
-        On-peak = 7 AM–11 PM weekdays. Not a bankable forecast; accuracy drops after 3–5 days.
-      </p>
+      <p id="noaa-status" class="noaa-status"></p>
+      <ul class="solar-note">
+        <li>Uses Open-Meteo's sunlight forecast for fixed panels facing the equator (no sun tracking), minus 20% for system losses and less output when panels run hot.</li>
+        <li>On-peak is 7 AM–11 PM local time, Monday–Friday (hours ending 8–23, the Eastern market convention). Holidays are not excluded.</li>
+        <li>The NOAA check compares daytime cloud cover with the National Weather Service forecast. It covers U.S. locations only, for about 7 days.</li>
+        <li>A planning estimate, not a bankable forecast. Accuracy drops after 3–5 days.</li>
+      </ul>
     </section>
 
     <section class="details">

@@ -19,6 +19,7 @@
   --blob-2: #66d9ff;
   --blob-3: #ffd86f;
   --blob-opacity: 0.5;
+  --warn: #b45309;
 }
 
 /* Dark theme: follows the OS unless light is forced, or when dark is forced */
@@ -37,6 +38,7 @@
     --blob-2: #0072ff;
     --blob-3: #ff4e8a;
     --blob-opacity: 0.4;
+    --warn: #fbbf24;
   }
 }
 :root[data-theme="dark"] {
@@ -53,6 +55,7 @@
   --blob-2: #0072ff;
   --blob-3: #ff4e8a;
   --blob-opacity: 0.4;
+  --warn: #fbbf24;
 }
 
 body {
@@ -259,7 +262,18 @@ body {
   background: linear-gradient(90deg, #f7b733, #fc4a1a);
 }
 .solar-sub { font-size: 12px; opacity: 0.7; }
-.solar-note { margin-top: 10px; font-size: 11px; line-height: 1.4; opacity: 0.6; }
+.solar-check { margin-top: 3px; font-size: 12px; opacity: 0.85; }
+.solar-check.warn { color: var(--warn); opacity: 1; }
+.noaa-now { margin-top: 8px; font-size: 13px; opacity: 0.75; }
+.noaa-status { margin-top: 10px; font-size: 12px; opacity: 0.75; }
+.solar-note {
+  margin-top: 10px;
+  padding-left: 16px;
+  font-size: 12px;
+  line-height: 1.45;
+  opacity: 0.75;
+}
+.solar-note li + li { margin-top: 4px; }
 
 /* Detail tiles */
 .details {
