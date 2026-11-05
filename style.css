@@ -108,13 +108,13 @@ body {
   gap: 12px;
 }
 .greeting { font-size: 20px; font-weight: 600; }
-.theme-toggle {
+.segmented {
   display: flex;
   gap: 2px;
   padding: 3px;
   border-radius: 12px;
 }
-.theme-toggle button {
+.segmented button {
   background: none;
   border: none;
   color: inherit;
@@ -126,7 +126,7 @@ body {
   cursor: pointer;
   opacity: 0.7;
 }
-.theme-toggle button[aria-checked="true"] {
+.segmented button[aria-checked="true"] {
   background: var(--control-active);
   opacity: 1;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
@@ -244,7 +244,28 @@ body {
 .solar-summary div { display: flex; flex-direction: column; gap: 2px; }
 .solar-summary strong { font-size: 18px; font-weight: 600; }
 .label-sm { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.65; }
+.horizon { display: inline-flex; margin-bottom: 14px; box-shadow: none; }
 .solar-day { padding: 10px 0; }
+.solar-day.low { opacity: 0.6; }
+.solar-top span { display: flex; align-items: center; gap: 8px; }
+.confidence {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--control);
+}
+.solar-divider {
+  padding: 12px 0 4px;
+  border-top: 1px solid var(--divider);
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.75;
+}
+.solar-divider + .solar-day { border-top: none; }
 .solar-day + .solar-day { border-top: 1px solid var(--divider); }
 .solar-top { display: flex; justify-content: space-between; font-size: 16px; }
 .solar-top strong { font-weight: 600; }

@@ -6,7 +6,7 @@ Static site (index.html, style.css, app.js) with no build step. Deploy the repo 
 
 ## Solar projection
 
-Estimates daily output (MWh) for a solar plant at the selected location over 16 days, split into on-peak (7 AM-11 PM weekdays) and off-peak, with capacity factor. Uses Open-Meteo tilted irradiance with 20% system losses and temperature derating. Plant size and panel tilt are editable. This is a planning estimate, not a bankable forecast.
+Estimates daily output (MWh) for a solar plant at the selected location over 7 days by default (16 days optional, with days 8-16 marked low confidence), split into on-peak (7 AM-11 PM weekdays) and off-peak, with capacity factor. Uses Open-Meteo tilted irradiance with 20% system losses and temperature derating. Plant size and panel tilt are editable. This is a planning estimate, not a bankable forecast.
 
 ## NOAA check
 

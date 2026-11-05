@@ -36,6 +36,10 @@ const TEMP_COEFF = 0.004; // output lost per °C of panel temperature above 25 �
 // Agreement threshold for the NOAA cloud cover check, in percentage points
 const NOAA_AGREE_POINTS = 20;
 
+// How many days the solar card shows, and how much to trust each range
+let solarHorizon = 7;
+const CONFIDENCE = (i) => (i < 3 ? "High" : i < 7 ? "Moderate" : "Low");
+
 let currentLocation = DEFAULT_LOCATION;
 let lastData = null;
 let noaaSky = null; // Map of UTC hour -> NWS sky cover %
@@ -192,7 +196,8 @@ function solarByDay(data, plantMW) {
 
 function renderSolar(data) {
   const plantMW = Number($("plant-mw").value) || 0;
-  const days = solarByDay(data, plantMW);
+  const days = solarByDay(data, plantMW).slice(0, solarHorizon);
+  $("solar-title").textContent = `Solar Projection · ${days.length} Days`;
   const max = Math.max(...days.map((d) => d.total), 0.001);
   const cf = (mwh) => (plantMW ? (mwh / (plantMW * 24)) * 100 : 0);
   const total = days.reduce((sum, d) => sum + d.total, 0);
@@ -206,10 +211,14 @@ function renderSolar(data) {
     .map((d, i) => {
       const date = new Date(d.date + "T00:00");
       const label = i === 0 ? "Today" : date.toLocaleDateString([], { weekday: "short", month: "numeric", day: "numeric" });
-      return `<div class="solar-day">
-        <div class="solar-top"><span>${label}</span><strong>${d.total.toFixed(1)} MWh</strong></div>
+      const confidence = CONFIDENCE(i);
+      const low = confidence === "Low";
+      const mwh = (n) => n.toFixed(low ? 0 : 1); // whole numbers where the forecast is rough
+      const divider = i === 7 ? `<div class="solar-divider">Outlook · days 8–16 · low confidence</div>` : "";
+      return `${divider}<div class="solar-day${low ? " low" : ""}">
+        <div class="solar-top"><span>${label}<em class="confidence">${confidence}</em></span><strong>${mwh(d.total)} MWh</strong></div>
         <div class="bar"><span style="width:${(d.total / max) * 100}%"></span></div>
-        <div class="solar-sub">On-peak ${d.onPeak.toFixed(1)} · Off-peak ${d.offPeak.toFixed(1)} · CF ${cf(d.total).toFixed(1)}%</div>
+        <div class="solar-sub">On-peak ${mwh(d.onPeak)} · Off-peak ${mwh(d.offPeak)} · CF ${cf(d.total).toFixed(low ? 0 : 1)}%</div>
         ${noaaCheck(d)}
       </div>`;
     })
@@ -226,6 +235,14 @@ function noaaCheck(d) {
   const hint = diff > 0 ? "output may be lower" : "output may be higher";
   return `<div class="solar-check warn">⚠ ${clouds}: ${hint}</div>`;
 }
+
+document.querySelectorAll("[data-horizon]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    solarHorizon = Number(btn.dataset.horizon);
+    document.querySelectorAll("[data-horizon]").forEach((b) => b.setAttribute("aria-checked", b === btn));
+    if (lastData) renderSolar(lastData);
+  });
+});
 
 // Plant size only rescales; tilt changes the irradiance, so refetch (same location, so NOAA data stays)
 $("plant-mw").addEventListener("input", () => lastData && renderSolar(lastData));
